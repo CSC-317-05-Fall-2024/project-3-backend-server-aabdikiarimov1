@@ -1,13 +1,38 @@
 const handleSubmit = async (event) => {
-    event.preventDefault(); 
+    event.preventDefault(); // Prevent the default form submission behavior
 
-    // Extract fields from the form, and
-    // send a request to create a new restaurant
+    const formData = new FormData(event.target); // Get the form data
+    const newRestaurant = {
+        name: formData.get('name'), // Get the name from the form input
+        phone: formData.get('phone'), // Get the phone number from the form input
+        address: formData.get('address'), // Get the address from the form input
+        image: formData.get('image') || "images/default-restaurant.jpg" // Get the image URL or set a default
+    };
 
-}
+    try {
+        // Make a POST request to create a new restaurant
+        const response = await fetch('/api/restaurants', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newRestaurant) // Send the new restaurant data
+        });
+
+        if (response.ok) {
+            // If the response is OK, redirect to the restaurants page
+            window.location.href = '/restaurants';  
+        } else {
+            console.error("Failed to create restaurant:", await response.json());
+        }
+    } catch (error) {
+        console.error("Error:", error);
+    }
+};
 
 document.addEventListener('DOMContentLoaded', () => {
- 
-    // Add event listener to the form for submit events
-
+    const form = document.querySelector('#restaurant-form');  // Ensure the form has this ID
+    if (form) {
+        form.addEventListener('submit', handleSubmit); 
+    }
 });

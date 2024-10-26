@@ -3,10 +3,11 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Travel Guide</title>
     <link rel="stylesheet" href="/styles.css"/>
     <link rel="stylesheet" href="/restaurant-details-styles.css"/>
-    <link rel="icon" type="image/png" href="images/icon.svg">
 
 </head>
 
@@ -14,7 +15,7 @@
     <header></header>
     <nav></nav>
         <div class="restaurant-details">
-            <img class="restaurant-details-img" src="<%= photo %>">
+            <img src="/<%= photo %>" alt="<%= name %>" class="restaurant-image">
             <div>
                 <h1><%= name %></h1>
                 <h2><%= address %></h2>
